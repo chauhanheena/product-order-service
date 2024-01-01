@@ -50,6 +50,20 @@ function getOrderDetail(product_name) {
     return order;
 }
 
+app.get('/health', function(req, res){
+    const healthCheckRes = {
+        uptime: process.uptime(),
+        message: 'Healthy',
+        timestamp: Date.now()
+    };
+    try {
+        res.send(healthCheckRes);
+    } catch (error) {
+        healthCheckRes.message = error;
+        res.status(503).send();
+    }
+})
+
 app.get('/orders/:product_name', function (req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
     const orderDetail = getOrderDetail(req.params.product_name);
