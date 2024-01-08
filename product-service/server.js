@@ -41,3 +41,17 @@ app.get('/health', function(req, res){
         res.status(503).send();
     }
 })
+
+app.get('/version', function(req, res){
+    const versionResponse = {
+        uptime: process.uptime(),
+        message: 'Version: v1.0.0',
+        timestamp: Date.now()
+    };
+    try {
+        res.send(versionResponse);
+    } catch (error) {
+        versionResponse.message = error;
+        res.status(503).send();
+    }
+})
