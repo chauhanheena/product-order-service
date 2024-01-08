@@ -67,7 +67,7 @@ app.get('/health', function(req, res){
 app.get('/version', function(req, res){
     const versionResponse = {
         uptime: process.uptime(),
-        message: 'Version: v1.0.0',
+        message: 'Version: v2.0.0',
         timestamp: Date.now()
     };
     try {
