@@ -64,6 +64,20 @@ app.get('/health', function(req, res){
     }
 })
 
+app.get('/version', function(req, res){
+    const versionResponse = {
+        uptime: process.uptime(),
+        message: 'Version: v1.0.0',
+        timestamp: Date.now()
+    };
+    try {
+        res.send(versionResponse);
+    } catch (error) {
+        versionResponse.message = error;
+        res.status(503).send();
+    }
+})
+
 app.get('/orders/:product_name', function (req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
     const orderDetail = getOrderDetail(req.params.product_name);
